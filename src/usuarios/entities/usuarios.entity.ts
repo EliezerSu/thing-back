@@ -1,9 +1,16 @@
-import { BaseEntity, Column, Entity } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { EstadoEnum, GeneroEnum, IUsuario } from 'thing-package';
 
 @Entity({ name: 'usuarios' })
 export class UsuariosEntity extends BaseEntity implements IUsuario {
-  @Column({ unique: true })
+  @PrimaryGeneratedColumn('increment')
   id_usuario: number;
   @Column({ unique: true })
   usuario: string;
@@ -12,19 +19,19 @@ export class UsuariosEntity extends BaseEntity implements IUsuario {
   @Column()
   nombres: string;
   @Column()
-  apellidos?: string;
+  apellidos: string;
   @Column({ unique: true })
   correo: string;
+  @Column({ type: 'timestamptz' })
+  fecha_nacimiento: Date;
   @Column()
-  fecha_nacimiento: string;
-  @Column()
-  celular?: string;
+  celular: string;
   @Column({ type: 'enum', enum: GeneroEnum })
   sexo: GeneroEnum;
-  @Column({ type: 'enum', enum: EstadoEnum })
+  @Column({ type: 'enum', enum: EstadoEnum, default: EstadoEnum.ACTIVO })
   estado: EstadoEnum;
-  @Column()
+  @CreateDateColumn()
   fecha_creacion: Date;
-  @Column()
-  fecha_actualizacion?: Date;
+  @UpdateDateColumn()
+  fecha_actualizacion: Date;
 }
