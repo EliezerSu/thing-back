@@ -8,7 +8,7 @@ import { ErrorManager } from '../../utils/error.manager';
 
 @Injectable()
 export class UsuariosService
-  implements DefaultServiceBackStructure<UsuariosEntity>
+  /*implements DefaultServiceBackStructure<UsuariosEntity>*/
 {
   constructor(
     @InjectRepository(UsuariosEntity)
